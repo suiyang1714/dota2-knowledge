@@ -31,7 +31,7 @@ async function start () {
   }
   app.use(cors({
     origin: function (ctx) {
-      return 'http://localhost:7998'
+      return 'http://127.0.0.1:7278'
     },
     exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
     maxAge: 5,

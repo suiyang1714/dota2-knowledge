@@ -1,0 +1,30 @@
+{
+  "apps": [
+    {
+      "name": "dota2knowledge",
+      "script": "npm",
+      "args" : "start",
+      "env":{
+        "COMMON_VARIABLE" :"true"
+      },
+      "env_production" : {
+        "NODE_ENV" : "production"
+      }
+    }
+  ],
+  "deploy" :{
+    "production" :{
+      "user" : "aditya_sui",
+      "host" : ["47.98.174.146"],
+      "ref" : "origin/master",
+      "port": "22",
+      "repo": "git@github.com:suiyang1714/dota2-knowledge.git",
+      "path" : "/www/dota2knowledge/production",
+      "ssh_options" : "StrictHostKeyChecking=no",
+      "post-deploy" : "npm install && npm run build && pm2 startOrRestart ecosystem.json --env production",
+      "env" :{
+        "NODE_ENV" : "production"
+      }
+    }
+  }
+}

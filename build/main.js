@@ -86,204 +86,6 @@ module.exports = __webpack_require__(24);
 /***/ function(module, exports, __webpack_require__) {
 
 var mongoose = __webpack_require__(0);
-var Schema = mongoose.Schema;
-
-var QuestionSchema = new Schema({
-  issue: String,
-  options: {
-    type: Array
-  },
-  answer: {
-    type: Number
-  },
-  completed: [{
-    type: String,
-    ref: 'MinaUser'
-  }],
-  level: {
-    type: Number,
-    default: 1
-  },
-  meta: {
-    createdAt: {
-      type: Date,
-      default: Date.now()
-    },
-    updatedAt: {
-      type: Date,
-      default: Date.now()
-    }
-  }
-});
-
-QuestionSchema.pre('save', function (next) {
-  if (this.isNew) {
-    this.meta.createdAt = this.meta.updatedAt = Date.now();
-  } else {
-    this.meta.updatedAt = Date.now();
-  }
-
-  next();
-});
-
-var Question = mongoose.model('Question', QuestionSchema);
-
-module.exports = Question;
-
-/***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-var mongoose = __webpack_require__(0);
-var Schema = mongoose.Schema;
-
-var RecordSchema = new Schema({
-  openid: String,
-  victory: {
-    type: Number,
-    default: 0
-  },
-  failure: {
-    type: Number,
-    default: 0
-  },
-  highLadder: {
-    type: Number,
-    default: 1000
-  },
-  winStreak: {
-    type: Number,
-    default: 0
-  },
-  meta: {
-    createdAt: {
-      type: Date,
-      default: Date.now()
-    },
-    updatedAt: {
-      type: Date,
-      default: Date.now()
-    }
-  }
-});
-
-RecordSchema.pre('save', function (next) {
-  if (this.isNew) {
-    this.meta.createdAt = this.meta.updatedAt = Date.now();
-  } else {
-    this.meta.updatedAt = Date.now();
-  }
-
-  next();
-});
-
-var Record = mongoose.model('Record', RecordSchema);
-
-module.exports = Record;
-
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-var mongoose = __webpack_require__(0);
-var Schema = mongoose.Schema;
-
-var TemporaryRecordSchema = new Schema({
-  issueId: String,
-  userId: String,
-  meta: {
-    createdAt: {
-      type: Date,
-      default: Date.now()
-    },
-    updatedAt: {
-      type: Date,
-      default: Date.now()
-    }
-  }
-});
-
-TemporaryRecordSchema.pre('save', function (next) {
-  if (this.isNew) {
-    this.meta.createdAt = this.meta.updatedAt = Date.now();
-  } else {
-    this.meta.updatedAt = Date.now();
-  }
-
-  next();
-});
-
-var TemporaryRecord = mongoose.model('TemporaryRecord', TemporaryRecordSchema);
-
-module.exports = TemporaryRecord;
-
-/***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-var mongoose = __webpack_require__(0);
-var Schema = mongoose.Schema;
-
-var UserSchema = new Schema({
-  openid: String,
-  avatarUrl: String,
-  nickname: String,
-  role: {
-    type: String,
-    default: 'user'
-  },
-  unionid: String,
-  province: String,
-  country: String,
-  city: String,
-  gender: String,
-  record: {
-    type: String,
-    ref: 'Record'
-  },
-  meta: {
-    createdAt: {
-      type: Date,
-      default: Date.now()
-    },
-    updatedAt: {
-      type: Date,
-      default: Date.now()
-    }
-  }
-});
-
-UserSchema.pre('save', function (next) {
-  if (this.isNew) {
-    this.meta.createdAt = this.meta.updatedAt = Date.now();
-  } else {
-    this.meta.updatedAt = Date.now();
-  }
-
-  next();
-});
-
-var MinaUser = mongoose.model('MinaUser', UserSchema);
-
-module.exports = MinaUser;
-
-/***/ },
-/* 6 */
-/***/ function(module, exports) {
-
-var config = {
-  db: 'mongodb://127.0.0.1/dotamina',
-  appid: 'wxff809823ead99d17',
-  appsecret: '0d1ce506638e6f1c0b05f99417775121'
-};
-
-module.exports = config;
-
-/***/ },
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
-
-var mongoose = __webpack_require__(0);
 var bcrypt = __webpack_require__(18);
 
 var SALT_WORK_FACTOR = 10;
@@ -385,6 +187,204 @@ var Admin = mongoose.model('Admin', AdminSchema);
 module.exports = Admin;
 
 /***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+var mongoose = __webpack_require__(0);
+var Schema = mongoose.Schema;
+
+var QuestionSchema = new Schema({
+  issue: String,
+  options: {
+    type: Array
+  },
+  answer: {
+    type: Number
+  },
+  completed: [{
+    type: String,
+    ref: 'MinaUser'
+  }],
+  level: {
+    type: Number,
+    default: 1
+  },
+  meta: {
+    createdAt: {
+      type: Date,
+      default: Date.now()
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now()
+    }
+  }
+});
+
+QuestionSchema.pre('save', function (next) {
+  if (this.isNew) {
+    this.meta.createdAt = this.meta.updatedAt = Date.now();
+  } else {
+    this.meta.updatedAt = Date.now();
+  }
+
+  next();
+});
+
+var Question = mongoose.model('Question', QuestionSchema);
+
+module.exports = Question;
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+var mongoose = __webpack_require__(0);
+var Schema = mongoose.Schema;
+
+var RecordSchema = new Schema({
+  openid: String,
+  victory: {
+    type: Number,
+    default: 0
+  },
+  failure: {
+    type: Number,
+    default: 0
+  },
+  highLadder: {
+    type: Number,
+    default: 1000
+  },
+  winStreak: {
+    type: Number,
+    default: 0
+  },
+  meta: {
+    createdAt: {
+      type: Date,
+      default: Date.now()
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now()
+    }
+  }
+});
+
+RecordSchema.pre('save', function (next) {
+  if (this.isNew) {
+    this.meta.createdAt = this.meta.updatedAt = Date.now();
+  } else {
+    this.meta.updatedAt = Date.now();
+  }
+
+  next();
+});
+
+var Record = mongoose.model('Record', RecordSchema);
+
+module.exports = Record;
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+var mongoose = __webpack_require__(0);
+var Schema = mongoose.Schema;
+
+var TemporaryRecordSchema = new Schema({
+  issueId: String,
+  userId: String,
+  meta: {
+    createdAt: {
+      type: Date,
+      default: Date.now()
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now()
+    }
+  }
+});
+
+TemporaryRecordSchema.pre('save', function (next) {
+  if (this.isNew) {
+    this.meta.createdAt = this.meta.updatedAt = Date.now();
+  } else {
+    this.meta.updatedAt = Date.now();
+  }
+
+  next();
+});
+
+var TemporaryRecord = mongoose.model('TemporaryRecord', TemporaryRecordSchema);
+
+module.exports = TemporaryRecord;
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+var mongoose = __webpack_require__(0);
+var Schema = mongoose.Schema;
+
+var UserSchema = new Schema({
+  openid: String,
+  avatarUrl: String,
+  nickname: String,
+  role: {
+    type: String,
+    default: 'user'
+  },
+  unionid: String,
+  province: String,
+  country: String,
+  city: String,
+  gender: String,
+  record: {
+    type: String,
+    ref: 'Record'
+  },
+  meta: {
+    createdAt: {
+      type: Date,
+      default: Date.now()
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now()
+    }
+  }
+});
+
+UserSchema.pre('save', function (next) {
+  if (this.isNew) {
+    this.meta.createdAt = this.meta.updatedAt = Date.now();
+  } else {
+    this.meta.updatedAt = Date.now();
+  }
+
+  next();
+});
+
+var MinaUser = mongoose.model('MinaUser', UserSchema);
+
+module.exports = MinaUser;
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+var config = {
+  db: 'mongodb://127.0.0.1/dotamina',
+  appid: 'wxff809823ead99d17',
+  appsecret: '0d1ce506638e6f1c0b05f99417775121'
+};
+
+module.exports = config;
+
+/***/ },
 /* 8 */
 /***/ function(module, exports) {
 
@@ -443,7 +443,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 var fs = __webpack_require__(21);
 var resolve = __webpack_require__(23).resolve;
 var mongoose = __webpack_require__(0);
-var config = __webpack_require__(6);
+var config = __webpack_require__(7);
 
 /*const models = resolve(__dirname, './schema')
 fs.readdirSync(models)
@@ -535,15 +535,15 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 var router = __webpack_require__(22)();
 var WXBizDataCrypt = __webpack_require__(16);
-var config = __webpack_require__(6);
+var config = __webpack_require__(7);
 var flyio = __webpack_require__(20);
 var fly = new flyio();
 
-var Admin = __webpack_require__(7);
-var MinaUser = __webpack_require__(5);
-var Record = __webpack_require__(3);
-var Question = __webpack_require__(2);
-var TemporaryRecord = __webpack_require__(4);
+var Admin = __webpack_require__(2);
+var MinaUser = __webpack_require__(6);
+var Record = __webpack_require__(4);
+var Question = __webpack_require__(3);
+var TemporaryRecord = __webpack_require__(5);
 
 router.post('/api/UserWechat/login', function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_E_DOTA2Mina_dota2minaAdmin_node_modules_babel_runtime_regenerator___default.a.mark(function _callee(ctx, next) {
@@ -900,7 +900,7 @@ router.get('/api/updateRecord', function () {
 }());
 router.get('/api/delete/temporary', function () {
   var _ref6 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_E_DOTA2Mina_dota2minaAdmin_node_modules_babel_runtime_regenerator___default.a.mark(function _callee6(ctx, next) {
-    var openid;
+    var openid, deleteMsg, record;
     return __WEBPACK_IMPORTED_MODULE_0_E_DOTA2Mina_dota2minaAdmin_node_modules_babel_runtime_regenerator___default.a.wrap(function _callee6$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
@@ -910,14 +910,32 @@ router.get('/api/delete/temporary', function () {
             return TemporaryRecord.remove({ userId: openid }).exec();
 
           case 3:
+            deleteMsg = _context6.sent;
+            _context6.next = 6;
+            return Record.findOne({ openid: openid }).exec();
+
+          case 6:
+            record = _context6.sent;
+
+            if (!(deleteMsg.n > Number(record.winStreak))) {
+              _context6.next = 11;
+              break;
+            }
+
+            record.winStreak = deleteMsg.n;
+
+            _context6.next = 11;
+            return record.save();
+
+          case 11:
 
             ctx.body = {
               success: true,
               errmsg: '\u4E34\u65F6\u8BB0\u5F55\u6E05\u9664\u6210\u529F',
-              data: null
+              data: record
             };
 
-          case 4:
+          case 12:
           case 'end':
             return _context6.stop();
         }
@@ -1082,16 +1100,16 @@ module.exports = WXBizDataCrypt;
 /***/ function(module, exports, __webpack_require__) {
 
 var map = {
-	"./admin": 7,
-	"./admin.js": 7,
-	"./question": 2,
-	"./question.js": 2,
-	"./record": 3,
-	"./record.js": 3,
-	"./temporaryrecord": 4,
-	"./temporaryrecord.js": 4,
-	"./user": 5,
-	"./user.js": 5
+	"./admin": 2,
+	"./admin.js": 2,
+	"./question": 3,
+	"./question.js": 3,
+	"./record": 4,
+	"./record.js": 4,
+	"./temporaryrecord": 5,
+	"./temporaryrecord.js": 5,
+	"./user": 6,
+	"./user.js": 6
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -1206,7 +1224,7 @@ var start = function () {
           case 10:
             app.use(__WEBPACK_IMPORTED_MODULE_4_koa2_cors___default()({
               origin: function origin(ctx) {
-                return 'http://localhost:7998';
+                return 'http://127.0.0.1:7278';
               },
               exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
               maxAge: 5,

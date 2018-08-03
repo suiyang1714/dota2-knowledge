@@ -1,5 +1,5 @@
 import axios from 'axios'
-// const baseUrl = 'http://127.0.0.1:7278/'
+// const baseUrl = 'http://127.0.0.1:7278'
 const baseUrl = 'https://dota2.adityasui.com'
 class Services {
   newQuestion(issue) {

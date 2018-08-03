@@ -193,14 +193,23 @@ router.get('/api/updateRecord', async (ctx, next) => {
 router.get('/api/delete/temporary', async (ctx, next) => {
   const { openid } = ctx.query
 
-  await TemporaryRecord
+  let deleteMsg = await TemporaryRecord
     .remove({userId: openid})
     .exec()
+  let record = await Record
+    .findOne({openid: openid})
+    .exec()
+
+  if (deleteMsg.n > Number(record.winStreak)) {
+    record.winStreak = deleteMsg.n
+
+    await record.save()
+  }
 
   ctx.body = {
     success: true,
     errmsg: `临时记录清除成功`,
-    data: null
+    data: record
   }
 })
 // 登录
